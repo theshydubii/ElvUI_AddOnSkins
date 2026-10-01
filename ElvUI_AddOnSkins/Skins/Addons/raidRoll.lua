@@ -2,7 +2,7 @@ local E, L, V, P, G = unpack(ElvUI)
 local S = E:GetModule("Skins")
 local AS = E:GetModule("AddOnSkins")
 
-if not AS:IsAddonLODorEnabled("RaidRoll") then return end
+if not AS:IsAddonLODorEnabled("RaidRoll") and not AS:IsAddonLODorEnabled("RaidRoll_Announcer") then return end
 
 -- RaidRoll 4.4.15
 -- https://www.curseforge.com/wow/addons/raid-roll/files/450070
@@ -109,5 +109,24 @@ S:AddCallbackForAddon("RaidRoll_LootTracker", "RaidRoll_LootTracker", function()
 			S:HandleCloseButton(child)
 			break
 		end
+	end
+end)
+
+S:AddCallbackForAddon("RaidRoll_Announcer", "RaidRoll_Announcer", function()
+	if not E.private.addOnSkins.RaidRoll then return end
+
+	RaidRollAnnouncerFrame:SetTemplate("Transparent")
+	S:HandleCloseButton(RaidRollAnnouncerCloseButton, RaidRollAnnouncerFrame)
+	S:HandleButton(RaidRollAnnouncerItemButton)
+	S:HandleEditBox(RaidRollAnnouncerItemIDBox)
+	S:HandleEditBox(RaidRollAnnouncerDelayEditBox)
+
+	for _, action in ipairs({ "BIS", "ALTERNATIVE", "OPTIONAL", "MS", "OS", "DETMOG" }) do
+		S:HandleButton(_G["RaidRollAnnouncerButton_" .. action])
+	end
+	S:HandleButton(RaidRollAnnouncerCloseRoundButton)
+
+	for _, option in ipairs({ "bidding", "includeBIS", "includeAlternative", "includeOptional", "bisOverMS", "raidWarning" }) do
+		S:HandleCheckBox(_G["RaidRollAnnouncerCheck_" .. option])
 	end
 end)

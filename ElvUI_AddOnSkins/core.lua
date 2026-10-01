@@ -14,6 +14,8 @@ local addonList = {
 	"Recount",
 	"SexyCooldown",
 	"DBM",
+	"KPack",
+	"AddMan",
 	"Skada",
 	"Auctionator",
 	"BugSack",
@@ -639,3 +641,51 @@ local function InitializeCallback()
 end
 
 E:RegisterModule(AS:GetName(), InitializeCallback)
+
+local function registerAddManSkin()
+	if _G.AddMan_AddOnSkinRegistered or not AS:IsAddonLODorEnabled("AddMan") then return end
+	_G.AddMan_AddOnSkinRegistered = true
+	local S = E:GetModule("Skins")
+
+	S:AddCallbackForAddon("AddMan", "Skin_AddMan", function()
+		if not E.private.addOnSkins["AddMan"] then return end
+
+		_G.AddMan_SkinDialog = function(frame)
+			if frame.AddManSkinned then return end
+			frame.AddManSkinned = true
+
+			frame:StripTextures()
+			frame:SetTemplate("Transparent")
+			S:HandleCheckBox(frame.AddManAccountCheck)
+			S:HandleCheckBox(frame.AddManCharacterCheck)
+			S:HandleCheckBox(frame.AddManAccountMacroCheck)
+			S:HandleCheckBox(frame.AddManCharacterMacroCheck)
+			S:HandleCheckBox(frame.AddManBindingCheck)
+			S:HandleButton(frame.AddManApply)
+			S:HandleButton(frame.AddManBack)
+			S:HandleButton(frame.AddManCancel)
+		end
+
+		_G.AddMan_SkinProfileList = function(frame)
+			if not frame.AddManSkinned then
+				frame.AddManSkinned = true
+				frame:StripTextures()
+				frame:SetTemplate("Transparent")
+				S:HandleButton(frame.Close)
+				if frame.Scroll.ScrollBar and S.HandleScrollBar then
+					S:HandleScrollBar(frame.Scroll.ScrollBar)
+				end
+			end
+
+			for _, row in ipairs(frame.Rows or {}) do
+				if row.Select and not row.Select.AddManSkinned then
+					row.Select.AddManSkinned = true
+					S:HandleButton(row.Select)
+				end
+			end
+		end
+	end, true)
+end
+
+_G.AddMan_RegisterAddOnSkin = registerAddManSkin
+registerAddManSkin()

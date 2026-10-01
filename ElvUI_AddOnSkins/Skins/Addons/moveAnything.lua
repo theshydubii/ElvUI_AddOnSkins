@@ -2,10 +2,10 @@ local E, L, V, P, G = unpack(ElvUI)
 local S = E:GetModule("Skins")
 local AS = E:GetModule("AddOnSkins")
 
-if not AS:IsAddonLODorEnabled("MoveAnything") then return end
-
 local _G = _G
 local unpack = unpack
+
+if not AS:IsAddonLODorEnabled("MoveAnything") then return end
 
 -- MoveAnything 3.3.5-10
 -- https://www.curseforge.com/wow/addons/move-anything/files/434496

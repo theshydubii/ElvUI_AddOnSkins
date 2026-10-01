@@ -1,0 +1,52 @@
+{
+    "Lua.runtime.version": "Lua 5.1",
+    "Lua.runtime.builtin": {
+        "basic": "disable",
+        "debug": "disable",
+        "io": "disable",
+        "math": "disable",
+        "os": "disable",
+        "package": "disable",
+        "string": "disable",
+        "table": "disable",
+        "utf8": "disable"
+    },
+    "Lua.workspace.library": [
+        "~\\.vscode\\extensions\\ketho.wow-api-0.22.3\\Annotations\\Core"
+    ],
+    "Lua.diagnostics.globals": [
+        "NONE",
+        "NUM_CHAT_WINDOWS",
+        "TEXTURE_ITEM_QUEST_BORDER",
+        "UIPanelWindows",
+        "MAX_TALENT_TABS",
+        "WorldMapFrame",
+        "WorldMapFrameCloseButton",
+        "ChatEdit_ChooseBoxForSend",
+        "ToggleDropDownMenu",
+        "AchievementFrame",
+        "AchievementFrame_LoadUI",
+        "AchievementFrame_ToggleAchievementFrame",
+        "AchievementFrame_SelectAchievement",
+        "AchievementFrameAchievements",
+        "SetItemRef",
+        "TutorialFrameTop",
+        "TutorialFrameBottom",
+        "TEXTURE_ITEM_QUEST_BANG",
+        "ChatEdit_ActivateChat",
+        "PaperDollFrame",
+        "FriendsTabHeaderTab3",
+        "FriendsFrame",
+        "FauxScrollFrame_GetOffset",
+        "CharacterFrame",
+        "MerchantBuyBackItem",
+        "MerchantFrame",
+        "INBOXITEMS_TO_DISPLAY",
+        "MailFrame",
+        "MailItem1ExpireTime",
+        "InboxFrame",
+        "MailItem1",
+        "SendMailNameEditBox",
+        "ITEM_COOLDOWN_TOTAL"
+    ]
+}
