@@ -63,6 +63,14 @@ S:AddCallbackForAddon("Mapster", "Mapster", function()
 		S:HandleScrollBar(WorldMapQuestDetailScrollFrameScrollBar)
 		S:HandleScrollBar(WorldMapQuestRewardScrollFrameScrollBar)
 
+		S:SecureHook("dropdownScaleFix", function()
+			for _, child in ipairs({DropDownList1:GetChildren()}) do
+				if child:GetObjectType() == "Slider" and not child.backdrop then
+					S:HandleScrollBar(child)
+				end
+			end
+		end)
+
 		S:HandleCloseButton(WorldMapFrameCloseButton)
 
 		WorldMapFrameSizeDownButton:ClearAllPoints()
