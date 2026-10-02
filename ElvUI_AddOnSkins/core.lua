@@ -198,10 +198,10 @@ local function getOptions()
 	}
 
 	local options = {
-		order = 50,
+		order = 180,
 		type = "group",
 		childGroups = "tab",
-		name = string.format("|cff1784d1%s|r", L["AddOn Skins"]),
+		name = string.format("|cffa855f7%s|r", L["AddOn Skins"]),
 		args = {
 			skins = {
 				order = 1,
