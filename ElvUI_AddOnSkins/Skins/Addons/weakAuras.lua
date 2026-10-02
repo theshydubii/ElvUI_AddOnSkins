@@ -62,3 +62,68 @@ S:AddCallbackForAddon("WeakAuras", "WeakAuras", function()
 		end
 	end
 end)
+
+local function Skin_WeakAurasOptions()
+	if WeakAuras.IsCorrectVersion or not E.private.addOnSkins.WeakAuras then return end
+
+	local function SkinDisplayButton(button)
+		if button and button.frame then
+			S:HandleButton(button.frame, false, nil, true)
+		end
+	end
+
+	local function SkinGroup(group)
+		if not group or not group.frame then return end
+
+		group.frame:StripTextures()
+		group.frame:SetTemplate("Transparent")
+
+		local border = group.content and group.content:GetParent()
+		if border then
+			border:StripTextures()
+			border:SetTemplate("Transparent")
+		end
+	end
+
+	local function SkinOptionsFrame()
+		local frame = WeakAurasOptions
+		if not frame or frame.addOnSkinsSkinned then return end
+
+		frame:StripTextures()
+		frame:SetTemplate("Transparent")
+		frame.addOnSkinsSkinned = true
+
+		if frame.CloseButton then
+			S:HandleCloseButton(frame.CloseButton)
+		end
+
+		if frame.filterInput then
+			S:HandleEditBox(frame.filterInput)
+		end
+
+		SkinGroup(frame.buttonsContainer)
+		SkinGroup(frame.container)
+
+		if frame.toolbarContainer then
+			for _, button in ipairs({frame.toolbarContainer:GetChildren()}) do
+				S:HandleButton(button, false, nil, true)
+			end
+		end
+
+		if frame.buttonsScroll and not frame.buttonsScroll.addOnSkinsHooked then
+			frame.buttonsScroll.addOnSkinsHooked = true
+			hooksecurefunc(frame.buttonsScroll, "AddChild", function(_, button)
+				SkinDisplayButton(button)
+			end)
+		end
+
+		for _, button in ipairs(frame.buttonsScroll and frame.buttonsScroll.children or {}) do
+			SkinDisplayButton(button)
+		end
+	end
+
+	hooksecurefunc(WeakAuras, "ShowOptions", SkinOptionsFrame)
+	SkinOptionsFrame()
+end
+
+S:AddCallbackForAddon("WeakAurasOptions", "WeakAurasOptions", Skin_WeakAurasOptions)
