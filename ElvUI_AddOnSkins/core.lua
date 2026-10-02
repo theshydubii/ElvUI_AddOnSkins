@@ -198,7 +198,7 @@ local function getOptions()
 	}
 
 	local options = {
-		order = 180,
+		order = 3,
 		type = "group",
 		childGroups = "tab",
 		name = string.format("|cffa855f7%s|r", L["AddOn Skins"]),
